@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-underscore-dangle */
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -16,40 +18,43 @@ const genDiff = (filepath1, filepath2) => {
 
   const typeResult = [];
 
-  for (const key of allUniqKeys) {
+  allUniqKeys.map((key) => {
     if (parsedFile1Keys.includes(key) && !parsedFile2Keys.includes(key)) {
-      typeResult.push ({type: 'deleted', key, value: parsedFile1[key]});
+      typeResult.push({ type: 'deleted', key, value: parsedFile1[key] });
+    } else if (!parsedFile1Keys.includes(key) && parsedFile2Keys.includes(key)) {
+      typeResult.push({ type: 'inserted', key, value: parsedFile2[key] });
+    } else if (parsedFile1[key] === parsedFile2[key]) {
+      typeResult.push({ type: 'unchanged', key, value: parsedFile1[key] });
+    } else {
+      typeResult.push({
+        type: 'changed', key, oldValue: parsedFile1[key], newValue: parsedFile2[key],
+      });
     }
-    else if (!parsedFile1Keys.includes(key) && parsedFile2Keys.includes(key)) {
-      typeResult.push ({type: 'inserted', key, value: parsedFile2[key]});
-    }
-    else if (parsedFile1[key] === parsedFile2[key]) {
-      typeResult.push ({type: 'unchanged', key, value: parsedFile1[key]});
-    }
-    else typeResult.push ({type: 'changed', key, oldValue: parsedFile1[key], newValue: parsedFile2[key]});
-  }
+    return typeResult;
+  });
 
   const result = [];
 
-  for (const item of typeResult) {
-    const {key, value, oldValue, newValue, type} = item;
+  typeResult.map((item) => {
+    const {
+      type, key, value, oldValue, newValue,
+    } = item;
     if (type === 'deleted') {
       result.push(`- ${key}: ${value}`);
-    }
-    else if (type === 'inserted') {
+    } else if (item.type === 'inserted') {
       result.push(`+ ${key}: ${value}`);
-    }
-    else if (type === 'unchanged') {
+    } else if (item.type === 'unchanged') {
       result.push(`  ${key}: ${value}`);
-    }
-    else {
+    } else {
       result.push(`- ${key}: ${oldValue}`);
       result.push(`+ ${key}: ${newValue}`);
-    } 
-  }
+    }
+    return result;
+  });
 
-  return '{' + '\n  ' + result.join('\n  ') + '\n' + '}';
+  const finalResult = result.join('\n  ');
 
+  return `{\n  ${finalResult}\n}`;
 };
 
 export default genDiff;
