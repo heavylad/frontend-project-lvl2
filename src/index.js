@@ -8,8 +8,8 @@ import _ from 'lodash';
 const genDiff = (filepath1, filepath2) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
-  const getFixturePath1 = (filepath1) => path.join(__dirname, '__fixtures__', filepath1);
-  const getFixturePath2 = (filepath2) => path.join(__dirname, '__fixtures__', filepath2);
+  const getFixturePath1 = (filepath1) => path.join(__dirname, '..', '__fixtures__', filepath1);
+  const getFixturePath2 = (filepath2) => path.join(__dirname, '..', '__fixtures__', filepath2);
   const parsedFile1 = JSON.parse(fs.readFileSync(getFixturePath1(filepath1), 'utf8'));
   const parsedFile2 = JSON.parse(fs.readFileSync(getFixturePath2(filepath2), 'utf8'));
   const parsedFile1Keys = Object.keys(parsedFile1);
