@@ -12,4 +12,6 @@
 [![node CI](https://github.com/heavylad/frontend-project-lvl2/actions/workflows/nodejs.yml/badge.svg)](https://github.com/heavylad/frontend-project-lvl2/actions/workflows/nodejs.yml)
 
 
-[![asciicast](https://asciinema.org/a/505324.svg)](https://asciinema.org/a/505324)
+[![asciicast](https://asciinema.org/a/507114.svg)](https://asciinema.org/a/507114)
+
+[![asciicast](https://asciinema.org/a/507115.svg)](https://asciinema.org/a/507115)
