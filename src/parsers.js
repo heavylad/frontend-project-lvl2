@@ -9,13 +9,14 @@ const parseFile = (filename) => {
   const __dirname = dirname(__filename);
   const getPath = () => join(__dirname, '..', '__fixtures__', filename);
   const readFile = () => readFileSync(getPath(filename), 'utf8');
+
   if (extname(filename) === '.json') {
     return JSON.parse(readFile(filename));
   }
   if (extname(filename) === '.yml' || extname(filename) === '.yaml') {
     return load(readFile(filename));
   }
-  return console.log('Wrong file extension');
+  throw new Error('Wrong file extension');
 };
 
 export default parseFile;
