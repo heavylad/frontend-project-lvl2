@@ -1,28 +1,15 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { readFileSync } from 'fs';
+import readFile from '../src/read.js';
 import genDiff from '../src/index.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
-const result = readFileSync(getFixturePath('testResult2.txt'), 'utf8');
-const result2 = readFileSync(getFixturePath('testResult.txt'), 'utf8');
-
-test('testFlatJSON', () => {
-  expect(genDiff('file3.json', 'file4.json')).toEqual(result);
+test('testJSON&YAMLFiles', () => {
+  expect(genDiff('file1.json', 'file2.json')).toEqual(readFile('testResultStylish.txt'));
+  expect(genDiff('file1.yml', 'file2.yaml')).toEqual(readFile('testResultStylish.txt'));
+  expect(genDiff('file1.json', 'file2.json', 'plain')).toEqual(readFile('testResultPlain.txt'));
+  expect(genDiff('file1.yml', 'file2.yaml', 'plain')).toEqual(readFile('testResultPlain.txt'));
 });
 
-test('testFlatYAML', () => {
-  expect(genDiff('file3.yml', 'file4.yaml')).toEqual(result);
-});
-
-test('testNestedJSON', () => {
-  expect(genDiff('file1.json', 'file2.json')).toEqual(result2);
-});
-
-test('testNestedYAML', () => {
-  expect(genDiff('file1.yml', 'file2.yaml')).toEqual(result2);
+test('testErrors', () => {
+  expect(() => { genDiff('file1.yml', 'file2.yaml', 'plai'); }).toThrow(new Error('Wrong file format'));
+  expect(() => { genDiff('file1.json', 'file2.jso'); }).toThrow(new Error('Wrong file extension'));
 });

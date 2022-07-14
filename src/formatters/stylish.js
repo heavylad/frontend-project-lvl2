@@ -18,22 +18,25 @@ const stringify = (value, depth) => {
   return ['{', ...nestedValue, `${indentForClosing}}`].join('\n');
 };
 
-const stylish = (tree, depth = 1) => tree.map((item) => {
-  const {
-    type, key, value, oldValue, newValue,
-  } = item;
-  const indent = getIndent(depth);
-  const indentForSign = indent.slice(2);
-  if (type === 'deleted') {
-    return `${indentForSign}- ${key}: ${stringify(value, depth + 1)}`;
-  } if (type === 'added') {
-    return `${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`;
-  } if (type === 'nested') {
-    return `${indent}${key}: {\n${stylish(value, depth + 1).join('\n')}\n${indent}}`;
-  } if (type === 'unchanged') {
-    return `${indent}${key}: ${stringify(value, depth + 1)}`;
-  } return [`${indentForSign}- ${key}: ${stringify(oldValue, depth + 1)}`,
-    `${indentForSign}+ ${key}: ${stringify(newValue, depth + 1)}`].join('\n');
-});
+const stylish = (tree) => {
+  const iter = (node, depth) => node.map((item) => {
+    const {
+      type, key, value, oldValue, newValue,
+    } = item;
+    const indent = getIndent(depth);
+    const indentForSign = indent.slice(2);
+    if (type === 'deleted') {
+      return `${indentForSign}- ${key}: ${stringify(value, depth + 1)}`;
+    } if (type === 'added') {
+      return `${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`;
+    } if (type === 'nested') {
+      return `${indent}${key}: {\n${iter(value, depth + 1).join('\n')}\n${indent}}`;
+    } if (type === 'unchanged') {
+      return `${indent}${key}: ${stringify(value, depth + 1)}`;
+    } return [`${indentForSign}- ${key}: ${stringify(oldValue, depth + 1)}`,
+      `${indentForSign}+ ${key}: ${stringify(newValue, depth + 1)}`].join('\n');
+  });
+  return `{\n${iter(tree, 1).join('\n')}\n}`;
+};
 
 export default stylish;

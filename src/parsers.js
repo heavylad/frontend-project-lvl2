@@ -1,15 +1,8 @@
-/* eslint-disable no-underscore-dangle */
-import { dirname, join, extname } from 'path';
-import { fileURLToPath } from 'url';
-import { readFileSync } from 'fs';
+import { extname } from 'path';
 import { load } from 'js-yaml';
+import readFile from './read.js';
 
 const parseFile = (filename) => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-  const getPath = () => join(__dirname, '..', '__fixtures__', filename);
-  const readFile = () => readFileSync(getPath(filename), 'utf8');
-
   if (extname(filename) === '.json') {
     return JSON.parse(readFile(filename));
   }

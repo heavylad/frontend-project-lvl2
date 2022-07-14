@@ -19,3 +19,7 @@
 [![asciicast](https://asciinema.org/a/508210.svg)](https://asciinema.org/a/508210)
 
 [![asciicast](https://asciinema.org/a/508211.svg)](https://asciinema.org/a/508211)
+
+[![asciicast](https://asciinema.org/a/508458.svg)](https://asciinema.org/a/508458)
+
+[![asciicast](https://asciinema.org/a/508460.svg)](https://asciinema.org/a/508460)
