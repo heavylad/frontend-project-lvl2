@@ -7,7 +7,7 @@ const readFile = (filename) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const getPath = () => join(__dirname, '..', '__fixtures__', filename);
-  return readFileSync(getPath(filename), 'utf8');
+  return readFileSync(getPath(), 'utf8');
 };
 
 export default readFile;
