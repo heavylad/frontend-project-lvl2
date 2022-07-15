@@ -25,16 +25,19 @@ const stylish = (tree) => {
     } = item;
     const indent = getIndent(depth);
     const indentForSign = indent.slice(2);
-    if (type === 'deleted') {
-      return `${indentForSign}- ${key}: ${stringify(value, depth + 1)}`;
-    } if (type === 'added') {
-      return `${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`;
-    } if (type === 'nested') {
-      return `${indent}${key}: {\n${iter(value, depth + 1).join('\n')}\n${indent}}`;
-    } if (type === 'unchanged') {
-      return `${indent}${key}: ${stringify(value, depth + 1)}`;
-    } return [`${indentForSign}- ${key}: ${stringify(oldValue, depth + 1)}`,
-      `${indentForSign}+ ${key}: ${stringify(newValue, depth + 1)}`].join('\n');
+    switch (type) {
+      case 'deleted':
+        return `${indentForSign}- ${key}: ${stringify(value, depth + 1)}`;
+      case 'added':
+        return `${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`;
+      case 'nested':
+        return `${indent}${key}: {\n${iter(value, depth + 1).join('\n')}\n${indent}}`;
+      case 'unchanged':
+        return `${indent}${key}: ${stringify(value, depth + 1)}`;
+      default:
+        return [`${indentForSign}- ${key}: ${stringify(oldValue, depth + 1)}`,
+          `${indentForSign}+ ${key}: ${stringify(newValue, depth + 1)}`].join('\n');
+    }
   });
   return `{\n${iter(tree, 1).join('\n')}\n}`;
 };

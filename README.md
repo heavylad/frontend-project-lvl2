@@ -12,18 +12,20 @@
 [![node CI](https://github.com/heavylad/frontend-project-lvl2/actions/workflows/nodejs.yml/badge.svg)](https://github.com/heavylad/frontend-project-lvl2/actions/workflows/nodejs.yml)
 
 
+### Project asciinemas:
+#### Flat JSON files comparison
 [![asciicast](https://asciinema.org/a/507114.svg)](https://asciinema.org/a/507114)
-
+#### Flat YAML files comparison
 [![asciicast](https://asciinema.org/a/507115.svg)](https://asciinema.org/a/507115)
-
+#### Nested JSON files comparison (stylish format)
 [![asciicast](https://asciinema.org/a/508210.svg)](https://asciinema.org/a/508210)
-
+#### Nested YAML files comparison (stylish format)
 [![asciicast](https://asciinema.org/a/508211.svg)](https://asciinema.org/a/508211)
-
+#### Nested JSON files comparison (plain format)
 [![asciicast](https://asciinema.org/a/508458.svg)](https://asciinema.org/a/508458)
-
+#### Nested YAML files comparison (plain format)
 [![asciicast](https://asciinema.org/a/508460.svg)](https://asciinema.org/a/508460)
-
+#### Nested JSON files comparison (json format)
 [![asciicast](https://asciinema.org/a/508600.svg)](https://asciinema.org/a/508600)
-
+#### Nested YAML files comparison (json format)
 [![asciicast](https://asciinema.org/a/508601.svg)](https://asciinema.org/a/508601)

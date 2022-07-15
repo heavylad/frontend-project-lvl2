@@ -13,15 +13,18 @@ const plain = (tree) => {
       type, key, value, oldValue, newValue,
     } = item;
     const path = [...parentKey, key].join('.');
-    if (type === 'deleted') {
-      return `Property '${path}' was removed`;
-    } if (type === 'added') {
-      return `Property '${path}' was added with value: ${getValue(value)}`;
-    } if (type === 'nested') {
-      return `${iter(value, [path]).join('\n')}`;
-    } if (type === 'unchanged') {
-      return [];
-    } return `Property '${path}' was updated. From ${getValue(oldValue)} to ${getValue(newValue)}`;
+    switch (type) {
+      case 'deleted':
+        return `Property '${path}' was removed`;
+      case 'added':
+        return `Property '${path}' was added with value: ${getValue(value)}`;
+      case 'nested':
+        return `${iter(value, [path]).join('\n')}`;
+      case 'unchanged':
+        return [];
+      default:
+        return `Property '${path}' was updated. From ${getValue(oldValue)} to ${getValue(newValue)}`;
+    }
   });
   return [...iter(tree, [])].join('\n');
 };
