@@ -5,7 +5,7 @@
   "description": "[![Actions Status](https://github.com/heavylad/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/heavylad/frontend-project-lvl2/actions)",
   "main": "src/index.js",
   "scripts": {
-    "test": "npx jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "bin": {
     "gendiff": "bin/gendiff.js"
