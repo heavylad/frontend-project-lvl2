@@ -3,7 +3,7 @@ import _ from 'lodash';
 const ast = (parsedFile1, parsedFile2) => {
   const file1Keys = Object.keys(parsedFile1);
   const file2Keys = Object.keys(parsedFile2);
-  const allUniqKeys = _.uniq([...file1Keys, ...file2Keys]).sort();
+  const allUniqKeys = _.sortBy(_.uniq([...file1Keys, ...file2Keys]));
 
   return allUniqKeys.map((key) => {
     if (file1Keys.includes(key) && !file2Keys.includes(key)) {
