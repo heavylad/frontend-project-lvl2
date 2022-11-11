@@ -4,12 +4,12 @@
 
 ## Gendiff 
 
-Gendiff is a program that determines the difference between two data structures. This is a popular task for which there are many online services, such as [http://www.jsondiff.com/](http://www.jsondiff.com/). A similar mechanism is used when outputting tests or when automatically tracking changes in configuration files.
+Gendiff is a program that determines the difference between two data structures. There are many online services for this popular task, such as [http://www.jsondiff.com/](http://www.jsondiff.com/). A similar mechanism is used when outputting tests or when automatically tracking changes in configuration files.
 
 Gendiff features:
 
-- support for different input formats: yaml, json
-- Report generation in the form of plain text, stylish and json
+- supporting for different input formats: yaml, json
+- reporting generation in the form of plain text, stylish and json
 
 ## Installation Guide
 
